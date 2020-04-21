@@ -17,3 +17,4 @@ APIExternalProducer.js
 /mta_archives/
 .che
 /dist/
+package-lock.json
