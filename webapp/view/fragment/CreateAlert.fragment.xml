@@ -1,0 +1,18 @@
+<Dialog id="createAlertDialog" xmlns="sap.m" xmlns:f="sap.ui.layout.form" title="{i18n>CREATE_ALERT}">
+	<f:SimpleForm id="simpleForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Title"/>
+					<TextArea id="name" value="{CreateAlertModel>/Title}" growing="true"/>
+					<Label text="Description"/>
+					<TextArea value="{CreateAlertModel>/Description}" growing="true"/>
+					<Label text="valid Until"/>
+					<DatePicker value="{ path: 'CreateAlertModel>/ValidUntil', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { pattern: 'dd.MM.yyyy' } }" valueFormat="dd.MM.yyyy" change="handleChange" class="sapUiSmallMarginBottom"/>
+				</f:content>
+			</f:SimpleForm>
+	<buttons>
+		<Button text="{i18n>OK}" type="Accept" press="onCreateAlert"/>
+		<Button text="{i18n>CANCEL}" press="cancelCreateAlert" type="Reject"/>
+	</buttons>
+</Dialog>

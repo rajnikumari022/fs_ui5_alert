@@ -1,0 +1,49 @@
+<mvc:View controllerName="org.dh.fin.alert.fs_ui5_alert.controller.Detail" xmlns="sap.m" xmlns:semantic="sap.f.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc">
+	<semantic:SemanticPage id="detailPage" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:titleHeading>
+			<Title text="{Title}" level="H2"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<ObjectStatus title="Status" text="{Status}" state="Success"/>
+		</semantic:headerContent>
+		<semantic:content>
+			<f:SimpleForm id="simpleForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:toolbar>
+					<Toolbar>
+						<Title text="Details"/>
+						<ToolbarSpacer/>
+						<Button id="edit" text="Edit" enabled="true" visible="{= !${EditModel>/isEditMode}}" press="handleEditPress"/>
+						<Button id="save" text="Save" type="Emphasized" visible="{= ${EditModel>/isEditMode}}" press="handleSavePress"/>
+						<Button id="cancel" text="Cancel" visible="{= ${EditModel>/isEditMode}}" press="handleCancelPress"/>
+						<Button id="delete" text="Delete" enabled="true" press="handleDeletePress" type="Reject"/>
+					</Toolbar>
+				</f:toolbar>
+				<f:content>
+					<Label text="Title"/>
+					<TextArea id="name" value="{CurrentAlertModel>/Title}" editable="{= ${EditModel>/isEditMode}}" growing="true"/>
+					<Label text="Description"/>
+					<TextArea value="{CurrentAlertModel>/Description}" growing="true" editable="{= ${EditModel>/isEditMode}}"/>
+					<Label text="valid Until"/>
+					<DatePicker editable="{= ${EditModel>/isEditMode}}"
+						value="{ path: 'CurrentAlertModel>/ValidUntil', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { pattern: 'dd.MM.yyyy' } }"
+						valueFormat="dd.MM.yyyy" change="handleChange" class="sapUiSmallMarginBottom"/>
+				</f:content>
+			</f:SimpleForm>
+		</semantic:content>
+		<!--Semantic ShareMenu Buttons-->
+		<semantic:closeAction>
+			<semantic:CloseAction id="closeColumn" press=".onCloseDetailPress"/>
+		</semantic:closeAction>
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction id="enterFullScreen"
+				visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}" press=".toggleFullScreen"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction id="exitFullScreen"
+				visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}" press=".toggleFullScreen"/>
+		</semantic:exitFullScreenAction>
+	</semantic:SemanticPage>
+</mvc:View>
