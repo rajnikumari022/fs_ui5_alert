@@ -30,6 +30,8 @@
 					<DatePicker editable="{= ${EditModel>/isEditMode}}"
 						value="{ path: 'CurrentAlertModel>/ValidUntil', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { pattern: 'dd.MM.yyyy' } }"
 						valueFormat="dd.MM.yyyy" change="handleChange" class="sapUiSmallMarginBottom"/>
+					<Label></Label>
+					<Button id="preview" text="Preview" enabled="true" press="handlePreviewPress"/>
 				</f:content>
 			</f:SimpleForm>
 		</semantic:content>

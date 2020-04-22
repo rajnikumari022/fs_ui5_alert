@@ -3,8 +3,9 @@ sap.ui.define([
 	'sap/ui/model/json/JSONModel',
 	'../model/formatter',
 	'sap/m/library',
-	'sap/base/util/deepClone'
-], function (BaseController, JSONModel, formatter, mobileLibrary, deepClone) {
+	'sap/base/util/deepClone',
+	'sap/ui/core/Fragment'
+], function (BaseController, JSONModel, formatter, mobileLibrary, deepClone, Fragment) {
 	'use strict';
 
 	return BaseController.extend('org.dh.fin.alert.fs_ui5_alert.controller.Detail', {
@@ -150,6 +151,20 @@ sap.ui.define([
 		handleCancelPress(oEvent){
 			this.getView().getModel('CurrentAlertModel').setData(this.oPreviousObject);
 			this.getModel('EditModel').setProperty('/isEditMode', false);
+		},
+		handlePreviewPress: async function (oEvent){
+			if (!this._oAlertPreviewDialog) {
+				this._oAlertPreviewDialog = await Fragment.load({
+					id: 'AlertPreviewDialogFragment',
+					name: 'org.dh.fin.alert.fs_ui5_alert.view.fragment.AlertPreview',
+					controller: this
+				});
+				this.getView().addDependent(this._oAlertPreviewDialog);
+			}
+			this._oAlertPreviewDialog.open();
+		},
+		onAlertPreviewDialogClosePress(){
+			this._oAlertPreviewDialog.close();
 		},
 		/**
 		 * Set the full screen mode to false and navigate to master page

@@ -1,0 +1,14 @@
+<Dialog
+	title="Attention!"
+	xmlns="sap.m"
+	state="Warning"
+	xmlns:core="sap.ui.core">
+	<buttons>
+        <Button id="cancelBtn" text="Close" press="onAlertPreviewDialogClosePress"></Button>
+    </buttons>
+    <VBox alignItems="Center" class="sapUiSmallMargin" >
+    	<Title titleStyle="H2" text="{CurrentAlertModel>/Title}"/>
+    	<Text text="{CurrentAlertModel>/Description}" textAlign="Center" />
+		<CheckBox id="DoNotShowCheckBox" text="Don't show it again" />
+    </VBox>
+</Dialog>
